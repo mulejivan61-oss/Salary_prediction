@@ -16,7 +16,7 @@ interview = st.number_input("Interview Score")
 
 if st.button("Predict Salary"):
 
-    skill_efficiency = skills / experience if experience != 0 else 0
+    skill_efficiency = skills / experience if experience > 0 else 0
 
     features = np.array([[experience, education, skills,
                           certifications, projects,
@@ -24,8 +24,6 @@ if st.button("Predict Salary"):
 
     scaled = scaler.transform(features)
 
-   prediction = model.predict(scaled)
+    prediction = abs(model.predict(scaled)[0])
 
-prediction = max(0, prediction[0])
-
-st.success(f"Predicted Salary: ₹{prediction:,.2f}")
+    st.success(f"Estimated Annual Salary: ₹{prediction:,.0f}")
