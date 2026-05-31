@@ -24,6 +24,8 @@ if st.button("Predict Salary"):
 
     scaled = scaler.transform(features)
 
-    prediction = model.predict(scaled)
+   prediction = model.predict(scaled)
 
-    st.success(f"Predicted Salary: ₹{prediction[0]:,.2f}")
+prediction = max(0, prediction[0])
+
+st.success(f"Predicted Salary: ₹{prediction:,.2f}")
